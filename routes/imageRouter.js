@@ -97,6 +97,19 @@ imageRouter.post("/", async (req, res) => {
   }
 });
 
+// get all images
+imageRouter.get('/', async(req, res) => {
+  try {
+      const images = await Image.find();
+      res.status(200).json(images)
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      msg: "SERVER ERROR",
+    });
+  }
+})
+
 // Remove image
 imageRouter.delete("/:id", async (req, res) => {
   try {
