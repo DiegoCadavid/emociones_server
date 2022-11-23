@@ -8,6 +8,7 @@ const imageRouter = require('./routes/imageRouter');
 const validatePSW = require('./middlewares/validatePSW');
 const letterRouter = require('./routes/letterRoute');
 const { connectDiscord } = require('./discord/connectDiscord');
+const authRouter = require('./routes/authRouter');
 
 class Server {
   constructor() {
@@ -42,6 +43,7 @@ class Server {
   routes(){
     this.app.use('/image',imageRouter);
     this.app.use('/letter',letterRouter);
+    this.app.use('/auth',authRouter);
   }
 
   init(){
