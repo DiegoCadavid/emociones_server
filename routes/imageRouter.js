@@ -53,7 +53,7 @@ imageRouter.post("/upload", async (req, res) => {
 imageRouter.post("/", async (req, res) => {
   try {
     // Validate body keys
-    const { url = null, cloudinaryId = null, label = null } = req.body;
+    const { url, cloudinaryId, label } = req.body;
 
     // Validamos que el usuario envio todos los valores
     if (!(url || cloudinaryId || label)) {
