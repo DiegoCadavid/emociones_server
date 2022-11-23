@@ -5,9 +5,8 @@ const morgan = require('morgan');
 const fileUpload = require('express-fileupload');
 const connectDb = require('./database/connectDB');
 const imageRouter = require('./routes/imageRouter');
-
-
-
+const validatePSW = require('./middlewares/validatePSW');
+const letterRouter = require('./routes/letterRoute');
 
 class Server {
   constructor() {
@@ -29,10 +28,14 @@ class Server {
     this.app.use(morgan('dev'));
     this.app.use(express.json());
     this.app.use(fileUpload());
+
+    // Auth middleware
+    this.app.use('*', validatePSW );
   }
 
   routes(){
     this.app.use('/image',imageRouter);
+    this.app.use('/letter',letterRouter);
   }
 
   init(){
