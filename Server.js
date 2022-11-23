@@ -7,6 +7,7 @@ const connectDb = require('./database/connectDB');
 const imageRouter = require('./routes/imageRouter');
 const validatePSW = require('./middlewares/validatePSW');
 const letterRouter = require('./routes/letterRoute');
+const { connectDiscord } = require('./discord/connectDiscord');
 
 class Server {
   constructor() {
@@ -15,6 +16,7 @@ class Server {
 
 
     this.connectdb();
+    this.connectDsc();
     this.middlewares();
     this.routes();
   }
@@ -31,6 +33,10 @@ class Server {
 
     // Auth middleware
     this.app.use('*', validatePSW );
+  }
+
+  connectDsc = () => {
+    connectDiscord();
   }
 
   routes(){

@@ -1,6 +1,7 @@
 const express = require("express");
 const { findOneAndDelete } = require("../database/models/Image");
 const Image = require("../database/models/Image");
+const { sendMessage } = require("../discord/connectDiscord");
 const cloudinary = require("cloudinary").v2;
 
 const imageRouter = express.Router();
@@ -88,6 +89,7 @@ imageRouter.post("/", async (req, res) => {
     await image.save();
 
     // Enviamos una respuesta
+    sendMessage(`Nueva imagen (${label})`);
     res.status(200).json(image);
   } catch (error) {
     console.log(error);
@@ -123,6 +125,7 @@ imageRouter.delete("/:id", async (req, res) => {
       });
     }
 
+    sendMessage(`Imagen (${ image.label }) removida`);
     return res.status(200).json(image);
   } catch (error) {
     console.log(error);

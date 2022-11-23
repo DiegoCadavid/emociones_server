@@ -1,5 +1,6 @@
 const express = require('express');
 const Letter = require('../database/models/Letter');
+const { sendMessage } = require('../discord/connectDiscord');
 const letterRouter = express.Router();
 
 letterRouter.post('/', async(req, res) => {
@@ -19,6 +20,7 @@ letterRouter.post('/', async(req, res) => {
 
         await letter.save();
 
+        sendMessage(`Nueva carga subida (${title})`)
         res.status(200).json(letter);
 
         
@@ -57,6 +59,7 @@ letterRouter.delete("/:id", async (req, res) => {
       });
     }
 
+    sendMessage(`Carta (${letter.title}) removida`);
     return res.status(200).json(letter);
   } catch (error) {
     console.log(error);
