@@ -1,7 +1,7 @@
 const express = require('express');
 const letterRouter = express.Router();
 
-letterRouter.get('/', (req, res) => {
+letterRouter.post('/', (req, res) => {
     res.status(200).json({ msg : 'path test'});
 });
 

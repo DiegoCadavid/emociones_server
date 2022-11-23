@@ -82,6 +82,7 @@ imageRouter.post("/", async (req, res) => {
       url,
       cloudinaryId,
       label,
+      createAt : new Date()
     });
 
     await image.save();
